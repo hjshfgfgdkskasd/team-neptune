@@ -3,736 +3,323 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Team Neptune | Portal</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Team Neptune</title>
 <style>
-:root {
-  --green: #39ff88;
-  --bg: #050a08;
-  --panel: #0b1510;
-  --muted: #92a89a;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: #e9fff0;
-  font-family: Consolas, "Courier New", monospace;
-  min-height: 100vh;
-}
-#matrix {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  opacity: .24;
-  z-index: 0;
-}
-header, main, footer {
-  position: relative;
-  z-index: 1;
-}
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 14px;
-  padding: 20px 7%;
-  border-bottom: 1px solid #163d29;
-  background: #050a08dd;
-}
-.logo {
-  color: var(--green);
-  font-weight: bold;
-  font-size: 21px;
-  letter-spacing: 2px;
-}
-nav { display: flex; gap: 8px; flex-wrap: wrap; }
-button, a { font: inherit; }
-nav button, .card button {
-  background: transparent;
-  color: var(--green);
-  border: 1px solid #285c3d;
-  border-radius: 7px;
-  padding: 10px 14px;
-  cursor: pointer;
-}
-nav button:hover, .card button:hover {
-  background: #123721;
-  border-color: var(--green);
-}
-main {
-  width: min(950px, 92%);
-  margin: 0 auto;
-  padding: 60px 0 45px;
-}
-.hero { text-align: center; margin-bottom: 40px; }
-.eyebrow {
-  color: var(--green);
-  letter-spacing: 4px;
-  font-size: 12px;
-}
-h1 {
-  color: var(--green);
-  font-size: clamp(32px, 7vw, 58px);
-  margin: 16px 0 8px;
-  text-shadow: 0 0 24px #39ff8844;
-}
-.subtitle { color: var(--muted); line-height: 1.7; }
-.search {
-  display: flex;
-  gap: 8px;
-  margin: 25px auto 0;
-  max-width: 650px;
-}
-input {
-  min-width: 0;
-  flex: 1;
-  background: #07110b;
-  color: white;
-  border: 1px solid #285c3d;
-  border-radius: 8px;
-  padding: 15px;
-  outline: none;
-  font: inherit;
-}
-input:focus { border-color: var(--green); }
-.primary {
-  color: #001b0b;
-  background: var(--green);
-  border: 0;
-  border-radius: 8px;
-  padding: 0 18px;
-  font-weight: bold;
-  cursor: pointer;
-}
-.primary:hover { background: #9bffc1; }
-.status {
-  color: var(--muted);
-  font-size: 12px;
-  margin-top: 15px;
-}
-.section { margin-top: 48px; }
-.section h2 {
-  color: var(--green);
-  font-size: 19px;
-  border-bottom: 1px solid #20452e;
-  padding-bottom: 12px;
-}
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 15px;
-}
-.card {
-  background: linear-gradient(140deg, #0d1a12, #08100b);
-  border: 1px solid #20452e;
-  border-radius: 12px;
-  padding: 20px;
-  transition: transform .2s, border-color .2s;
-}
-.card:hover {
-  transform: translateY(-3px);
-  border-color: var(--green);
-}
-.card .symbol { font-size: 25px; }
-.card h3 { color: #d9ffe6; margin-bottom: 8px; }
-.card p { color: var(--muted); font-size: 13px; line-height: 1.6; }
-.card button { margin-top: 8px; }
-.view { display: none; }
-.view.active { display: block; }
-#gameBox {
-  border: 1px solid #285c3d;
-  padding: 22px;
-  border-radius: 10px;
-  margin-top: 18px;
-  background: #07110b;
-}
-#gameBox button {
-  background: var(--green);
-  border: 0;
-  padding: 10px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  margin: 4px;
-}
-#gameBox .gameInput { width: 110px; }
-footer {
-  text-align: center;
-  padding: 25px;
-  color: var(--muted);
-  border-top: 1px solid #163d29;
-  font-size: 12px;
-}
-@media(max-width: 480px) {
-  header { padding: 16px 4%; }
-  .search { flex-direction: column; }
-  .primary { padding: 14px; }
-}
+:root{--bg:#050a0b;--panel:#091719ed;--accent:#42ffd0;--text:#e8fffa;--muted:#8db8b2;--line:#23534c}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Consolas,monospace;min-height:100vh;transition:background .5s}
+button,input,select{font:inherit}
+button,select{cursor:pointer}
+button{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:9px;padding:11px 14px}
+button:hover{border-color:var(--accent);color:var(--accent)}
+a{color:var(--accent)}
+#fx{position:fixed;inset:0;z-index:-1;overflow:hidden;background:linear-gradient(135deg,#061b18,#05080f,#11152a)}
+#fx:before,#fx:after{content:"";position:absolute;width:65vw;height:65vw;border-radius:50%;filter:blur(75px);opacity:.2;background:var(--accent);animation:float 17s ease-in-out infinite alternate}
+#fx:before{top:-35vw;left:-10vw}#fx:after{bottom:-40vw;right:-10vw;animation-delay:-8s}
+@keyframes float{to{transform:translate(12vw,13vh) scale(1.2)}}
+#stars{position:absolute;inset:0;background-image:radial-gradient(2px 2px at 20% 30%,#fff 50%,transparent 60%),radial-gradient(2px 2px at 80% 60%,#fff 50%,transparent 60%),radial-gradient(1px 1px at 50% 80%,#fff 50%,transparent 60%);background-size:170px 190px;animation:stars 30s linear infinite;opacity:.5}
+@keyframes stars{to{background-position:170px 190px}}
+.mountains{position:absolute;inset:auto 0 0;height:55%;background:linear-gradient(145deg,#453e67,#1c203e 55%,#0b1325);clip-path:polygon(0 100%,0 55%,13% 30%,22% 60%,35% 4%,46% 56%,57% 24%,70% 68%,83% 15%,100% 60%,100% 100%);opacity:0;animation:mountain 18s ease-in-out infinite alternate}
+@keyframes mountain{to{transform:translateX(3%) translateY(-2%)}}
+body[data-theme="neptune"]{--bg:#050a0b;--panel:#091719ed;--accent:#42ffd0;--text:#e8fffa;--muted:#8db8b2;--line:#23534c}
+body[data-theme="aero"]{--bg:#a8f5f4;--panel:#e4ffffdd;--accent:#007ca7;--text:#073d54;--muted:#286d7e;--line:#64cad8}
+body[data-theme="darkfantasy"]{--bg:#100b19;--panel:#1b1429ed;--accent:#d8b67a;--text:#f6e8d5;--muted:#b8a5c7;--line:#57405f}
+body[data-theme="backrooms"]{--bg:#aaa15b;--panel:#d0c783ed;--accent:#554a20;--text:#272516;--muted:#655e35;--line:#8a8247}
+body[data-theme="halloween"]{--bg:#16091e;--panel:#24102ded;--accent:#ff8c31;--text:#fff0dd;--muted:#c8a1d2;--line:#824322}
+body[data-theme="christmas"]{--bg:#071d19;--panel:#103027ed;--accent:#ffd887;--text:#fff5e8;--muted:#b7d7c5;--line:#a83c48}
+body[data-theme="cyberpunk"]{--bg:#0b061b;--panel:#180d2ced;--accent:#ff4ce6;--text:#fff0ff;--muted:#c4a2e8;--line:#5541a3}
+body[data-theme="ocean"]{--bg:#03182b;--panel:#082a43ed;--accent:#48e7ff;--text:#e1faff;--muted:#8fc8df;--line:#17668c}
+body[data-theme="vaporwave"]{--bg:#211039;--panel:#30184ced;--accent:#ff9cf7;--text:#fff0ff;--muted:#d1a9e7;--line:#8a4ea0}
+body[data-theme="bloodmoon"]{--bg:#100508;--panel:#210a10ed;--accent:#ff525e;--text:#ffe8e8;--muted:#c89a9a;--line:#6e202d}
+body[data-theme="forest"]{--bg:#07170d;--panel:#102919ed;--accent:#a6ff89;--text:#e8ffe6;--muted:#a4c9a2;--line:#32623a}
+body[data-theme="ice"]{--bg:#071522;--panel:#102a40ed;--accent:#9be9ff;--text:#effaff;--muted:#a8d0e8;--line:#377ca1}
+body[data-theme="sunset"]{--bg:#25102a;--panel:#3b1938ed;--accent:#ffbd77;--text:#fff0df;--muted:#e0b0bb;--line:#9b4d66}
+body[data-theme="monochrome"]{--bg:#080808;--panel:#151515ed;--accent:#fff;--text:#f5f5f5;--muted:#aaa;--line:#555}
+body[data-theme="aero"] #fx{background:linear-gradient(130deg,#5ad9ed,#c5ffff,#7bdbbc,#dffaff);background-size:300% 300%;animation:gradient 12s infinite alternate}
+body[data-theme="darkfantasy"] #fx{background:radial-gradient(circle at 78% 18%,#a18cda 0 7%,transparent 8%),linear-gradient(#100e27,#363050 55%,#090d1c)}
+body[data-theme="darkfantasy"] .mountains{opacity:.95;background:linear-gradient(140deg,#8874a4,#3a3559 45%,#11162a)}
+body[data-theme="backrooms"] #fx{background:repeating-linear-gradient(90deg,#aaa45a 0 110px,#c9c071 111px 220px,#8c874a 221px 224px);background-size:450px 100%;animation:hall 22s linear infinite}
+body[data-theme="halloween"] #fx{background:radial-gradient(ellipse at 30% 80%,#76254d,transparent 45%),linear-gradient(130deg,#10091f,#32103e,#090713)}
+body[data-theme="christmas"] #fx{background:linear-gradient(#092c30,#0d3829,#101728)}
+body[data-theme="cyberpunk"] #fx{background:repeating-linear-gradient(110deg,#0a071a 0 60px,#24103b 61px 64px,#101331 65px 125px,#401044 126px 129px);background-size:220% 220%;animation:gradient 10s linear infinite alternate}
+body[data-theme="ocean"] #fx{background:linear-gradient(160deg,#042c4b,#075a76,#031525);background-size:200% 200%;animation:gradient 16s ease infinite alternate}
+body[data-theme="vaporwave"] #fx{background:linear-gradient(140deg,#35104c,#862a78,#20184d,#100d28);background-size:300% 300%;animation:gradient 13s ease infinite alternate}
+body[data-theme="bloodmoon"] #fx{background:radial-gradient(circle at 78% 20%,#ad293855,transparent 25%),linear-gradient(#1b080f,#320b1a,#080508)}
+body[data-theme="forest"] #fx{background:radial-gradient(ellipse at 50% 90%,#19522c,transparent 50%),linear-gradient(#071b14,#0d3c26,#04110b)}
+body[data-theme="ice"] #fx{background:linear-gradient(145deg,#1b5270,#a4e6f5,#14304f,#071522);background-size:250% 250%;animation:gradient 18s ease infinite alternate}
+body[data-theme="sunset"] #fx{background:linear-gradient(145deg,#ffad68,#bd4d72,#4a245a,#1b143c);background-size:250% 250%;animation:gradient 15s ease infinite alternate}
+body[data-theme="monochrome"] #fx{background:radial-gradient(ellipse at 50% 0%,#393939,#080808 65%)}
+@keyframes gradient{to{background-position:100% 100%}}@keyframes hall{to{background-position:450px 0}}
+.wrap{width:min(1100px,94%);margin:auto}
+header{padding:22px 0;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.logo{color:var(--accent);font-weight:bold;font-size:clamp(22px,4vw,34px);letter-spacing:2px}
+.muted{color:var(--muted)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:20px;backdrop-filter:blur(12px);box-shadow:0 12px 35px #0002}
+h2{color:var(--accent);font-size:19px}
+.hero{padding:28px 0 12px}
+.hero h1{font-size:clamp(27px,5vw,43px);margin-bottom:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+.tile{display:block;color:var(--text);text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;min-height:110px;transition:transform .2s,border-color .2s}
+.tile:hover{transform:translateY(-3px);border-color:var(--accent)}
+.tile strong{display:block;color:var(--accent);margin-bottom:9px}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+section{margin:22px 0}
+.theme-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:center}
+select,input{background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:12px;max-width:100%}
+select{width:100%}
+#labCanvas{display:block;width:100%;height:330px;border:1px solid var(--line);border-radius:10px;background:#06131c;touch-action:none;cursor:crosshair}
+.lab-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0}
+.lab-controls input[type=range]{flex:1;min-width:100px}
+footer{padding:25px 0;color:var(--muted);font-size:12px}
+@media(max-width:600px){.theme-row{grid-template-columns:1fr}.panel{padding:15px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important}}
 </style>
 </head>
-<body>
-<canvas id="matrix"></canvas>
+<body data-theme="neptune">
+<div id="fx"><div id="stars"></div><div class="mountains"></div></div>
 
+<main class="wrap">
 <header>
-  <div class="logo">[ TEAM NEPTUNE ]</div>
-  <nav>
-    <button onclick="showView('home')">Home</button>
-    <button onclick="showView('games')">Games</button>
-    <button onclick="showView('apps')">Apps</button>
-  </nav>
+ <div><div class="logo">TEAM NEPTUNE_</div><div class="muted">EXPLORE · PLAY · CREATE</div></div>
+ <div class="muted">● PORTAL ONLINE</div>
 </header>
 
-<main>
-  <section class="view active" id="home">
-    <div class="hero">
-      <div class="eyebrow">SYSTEM ONLINE // V.01</div>
-      <h1>TEAM NEPTUNE</h1>
-      <div class="subtitle">
-        Your corner of the internet.<br>
-        Search, play, and explore.
-      </div>
-      <form class="search" id="searchForm">
-        <input id="query" placeholder="Enter a search..." aria-label="Search the web" required>
-        <button class="primary" type="submit">SEARCH ↗</button>
-      </form>
-      <div class="status">> PORTAL READY_</div>
-    </div>
+<div class="hero">
+ <div class="muted">YOUR PERSONAL DASHBOARD</div>
+ <h1>Explore beyond the ordinary.</h1>
+ <p class="muted">Choose your atmosphere. Make something. Experiment.</p>
+</div>
 
-    <div class="section">
-      <h2>// QUICK ACCESS</h2>
-      <div class="grid">
-        <article class="card">
-          <div class="symbol">⌕</div>
-          <h3>Web Search</h3>
-          <p>Search the web using your chosen search engine.</p>
-          <button onclick="document.getElementById('query').focus()">Open search</button>
-        </article>
-        <article class="card">
-          <div class="symbol">▣</div>
-          <h3>Games Hub</h3>
-          <p>Try the built-in games or browse game websites.</p>
-          <button onclick="showView('games')">Explore games</button>
-        </article>
-        <article class="card">
-          <div class="symbol">⌘</div>
-          <h3>Apps Hub</h3>
-          <p>Quick links to useful online tools.</p>
-          <button onclick="showView('apps')">Explore apps</button>
-        </article>
-      </div>
-    </div>
-  </section>
+<section class="panel">
+ <h2>✦ THEME SELECTOR</h2>
+ <div class="theme-row">
+  <select id="themePicker" onchange="changeTheme(this.value)">
+   <option value="neptune">🌌 Team Neptune</option>
+   <option value="aero">🌊 Frutiger Aero</option>
+   <option value="darkfantasy">🗡️ Dark Fantasy — Low Poly</option>
+   <option value="backrooms">🚪 Backrooms</option>
+   <option value="halloween">🎃 Halloween</option>
+   <option value="christmas">🎄 Christmas</option>
+   <option value="cyberpunk">🌆 Cyberpunk</option>
+   <option value="ocean">🐬 Deep Ocean</option>
+   <option value="vaporwave">🌴 Vaporwave</option>
+   <option value="bloodmoon">🌑 Blood Moon</option>
+   <option value="forest">🌲 Enchanted Forest</option>
+   <option value="ice">❄️ Frozen Arctic</option>
+   <option value="sunset">🌅 Sunset</option>
+   <option value="monochrome">⚫ Monochrome</option>
+  </select>
+  <div id="themeDescription" class="muted">Neon green, animated atmosphere.</div>
+ </div>
+</section>
 
-  <section class="view" id="games">
-    <h1>GAMES // ARCADE</h1>
-    <p class="subtitle">Choose a game to launch.</p>
-    <div class="grid">
-      <article class="card">
-        <div class="symbol">⚡</div>
-        <h3>Reaction Test</h3>
-        <p>Test your reflexes. Click as fast as you can.</p>
-        <button onclick="startReaction()">Play now</button>
-      </article>
-      <article class="card">
-        <div class="symbol">⌗</div>
-        <h3>Number Guess</h3>
-        <p>Guess the secret number between 1 and 100.</p>
-        <button onclick="startGuess()">Play now</button>
-      </article>
-      <article class="card">
-        <div class="symbol">🎮</div>
-        <h3>Game Directory</h3>
-        <p>Visit an external browser gaming website.</p>
-        <button onclick="openLink('https://itch.io/games/html5')">Browse games ↗</button>
-      </article>
-    </div>
-    <div id="gameBox" hidden>
-      <h2 id="gameTitle">GAME</h2>
-      <p id="gameMessage"></p>
-      <div id="gameControls"></div>
-      <button onclick="closeGame()">Close game</button>
-    </div>
-  </section>
+<nav>
+ <button onclick="showSection('home')">Home</button>
+ <button onclick="showSection('apps')">Apps</button>
+ <button onclick="showSection('games')">Games</button>
+ <button onclick="showSection('lab')">Aerodynamics Lab</button>
+</nav>
 
-  <section class="view" id="apps">
-    <h1>APPS // DIRECTORY</h1>
-    <p class="subtitle">Shortcuts to online tools and resources.</p>
-    <div class="grid">
-      <article class="card">
-        <h3>Wikipedia</h3>
-        <p>Explore an online encyclopedia.</p>
-        <button onclick="openLink('https://www.wikipedia.org/')">Open ↗</button>
-      </article>
-      <article class="card">
-        <h3>Scratch</h3>
-        <p>Create interactive stories and games.</p>
-        <button onclick="openLink('https://scratch.mit.edu/')">Open ↗</button>
-      </article>
-      <article class="card">
-        <h3>Photopea</h3>
-        <p>Edit images in your browser.</p>
-        <button onclick="openLink('https://www.photopea.com/')">Open ↗</button>
-      </article>
-      <article class="card">
-        <h3>GitHub</h3>
-        <p>Explore code and developer projects.</p>
-        <button onclick="openLink('https://github.com/')">Open ↗</button>
-      </article>
-    </div>
-  </section>
+<section id="home">
+ <h2>// QUICK ACCESS</h2>
+ <form onsubmit="searchWeb(event)" style="display:flex;gap:8px;flex-wrap:wrap;margin:15px 0">
+  <input id="query" placeholder="Search the web..." style="flex:1;min-width:150px">
+  <button type="submit">Search ↗</button>
+ </form>
+ <div class="grid">
+  <a class="tile" href="https://duckduckgo.com/" target="_blank" rel="noopener"><strong>⌕ Web Search ↗</strong><span class="muted">Search the web.</span></a>
+  <a class="tile" href="https://www.youtube.com/" target="_blank" rel="noopener"><strong>▶ YouTube ↗</strong><span class="muted">Open videos directly.</span></a>
+  <a class="tile" href="https://sandboxels.r74n.com/" target="_blank" rel="noopener"><strong>⚗ Sandboxels ↗</strong><span class="muted">Explore a digital sandbox.</span></a>
+ </div>
+</section>
+
+<section id="apps" class="hidden">
+ <h2>// APPLICATIONS</h2>
+ <div class="grid">
+  <a class="tile" href="https://www.youtube.com/" target="_blank" rel="noopener"><strong>YouTube ↗</strong><span class="muted">Videos and creators.</span></a>
+  <a class="tile" href="https://www.tiktok.com/" target="_blank" rel="noopener"><strong>TikTok ↗</strong><span class="muted">Short videos.</span></a>
+  <a class="tile" href="https://chatgpt.com/" target="_blank" rel="noopener"><strong>ChatGPT ↗</strong><span class="muted">AI assistant.</span></a>
+  <a class="tile" href="https://duckduckgo.com/" target="_blank" rel="noopener"><strong>DuckDuckGo ↗</strong><span class="muted">Web search.</span></a>
+  <a class="tile" href="https://www.wikipedia.org/" target="_blank" rel="noopener"><strong>Wikipedia ↗</strong><span class="muted">Knowledge and research.</span></a>
+  <a class="tile" href="https://www.photopea.com/" target="_blank" rel="noopener"><strong>Photopea ↗</strong><span class="muted">Image editor.</span></a>
+  <a class="tile" href="https://scratch.mit.edu/" target="_blank" rel="noopener"><strong>Scratch ↗</strong><span class="muted">Make games and animations.</span></a>
+  <a class="tile" href="https://github.com/" target="_blank" rel="noopener"><strong>GitHub ↗</strong><span class="muted">Code and projects.</span></a>
+ </div>
+</section>
+
+<section id="games" class="hidden">
+ <h2>// GAMES</h2>
+ <div class="grid">
+  <a class="tile" href="https://sandboxels.r74n.com/" target="_blank" rel="noopener"><strong>Sandboxels ↗</strong><span class="muted">Build, explore, experiment.</span></a>
+  <div class="tile"><strong>Number Guess</strong><p class="muted">Guess from 1 to 10.</p><input id="guess" type="number" min="1" max="10" placeholder="Your guess"><button onclick="guessNumber()">Guess</button><p id="guessResult"></p></div>
+  <div class="tile"><strong>Reaction Test</strong><p class="muted">Wait for green, then click.</p><button onclick="startReaction()">Start</button><div id="reaction" style="margin-top:10px;padding:18px;border-radius:8px;background:var(--bg)" onclick="hitReaction()">READY</div><p id="reactionResult"></p></div>
+ </div>
+</section>
+
+<section id="lab">
+ <div class="panel">
+  <h2>〰 AERODYNAMICS LAB</h2>
+  <p class="muted">Draw an object with your mouse or finger. Watch animated airflow move around your drawing. This is a visual demonstration, not a scientific fluid-dynamics solver.</p>
+  <canvas id="labCanvas"></canvas>
+  <div class="lab-controls">
+   <label for="wind">Wind speed</label><input id="wind" type="range" min="1" max="10" value="5">
+   <span id="windVal">5</span>
+   <button onclick="clearDrawing()">Clear drawing</button>
+   <button onclick="toggleFlow()" id="flowButton">Pause airflow</button>
+  </div>
+  <div class="grid">
+   <div class="tile"><strong>Wind speed</strong><span id="speedRead" class="muted">5 units</span></div>
+   <div class="tile"><strong>Flow behavior</strong><span id="flowRead" class="muted">Draw a shape to see airflow react.</span></div>
+   <div class="tile"><strong>Visual drag index</strong><span id="dragRead" class="muted">—</span></div>
+  </div>
+ </div>
+</section>
+<footer>TEAM NEPTUNE // BUILT FOR THE WEB</footer>
 </main>
 
-<footer>
-  TEAM NEPTUNE // INDEPENDENT WEB PROJECT
-</footer>
-
 <script>
-function showView(name) {
-  document.querySelectorAll('.view').forEach(v => {
-    v.classList.remove('active');
-  });
-  document.getElementById(name).classList.add('active');
-  window.scrollTo({top: 0, behavior: 'smooth'});
+const descriptions={
+ neptune:"Neon green, matrix atmosphere.",
+ aero:"Glossy aqua, bubbles, and bright glassy colors.",
+ darkfantasy:"Low-poly mountains, moonlight, and ancient magic.",
+ backrooms:"Yellow liminal halls and fluorescent atmosphere.",
+ halloween:"Purple fog and orange spooky glow.",
+ christmas:"Evergreen colors and falling snow.",
+ cyberpunk:"Neon city colors and moving light.",
+ ocean:"Deep blues and underwater motion.",
+ vaporwave:"Retro pink and purple gradients.",
+ bloodmoon:"A crimson moon in a dark sky.",
+ forest:"Enchanted green woodland.",
+ ice:"Glacial blue and arctic light.",
+ sunset:"Warm orange and purple twilight.",
+ monochrome:"Moving grayscale atmosphere."
+};
+function changeTheme(theme){
+ if(!descriptions[theme])return;
+ document.body.dataset.theme=theme;
+ document.getElementById("themeDescription").textContent=descriptions[theme];
+ try{localStorage.setItem("neptune-theme",theme)}catch(e){}
 }
-document.getElementById('searchForm').addEventListener('submit', e => {
-  e.preventDefault();
-  const q = document.getElementById('query').value.trim();
-  if (q) {
-    window.open(
-      'https://duckduckgo.com/?q=' + encodeURIComponent(q),
-      '_blank',
-      'noopener'
-    );
+try{
+ const saved=localStorage.getItem("neptune-theme");
+ if(saved&&descriptions[saved])document.getElementById("themePicker").value=saved;
+ changeTheme(saved&&descriptions[saved]?saved:"neptune");
+}catch(e){changeTheme("neptune")}
+
+function showSection(id){
+ ["home","apps","games","lab"].forEach(s=>document.getElementById(s).classList.toggle("hidden",s!==id));
+ document.getElementById(id).scrollIntoView({behavior:"smooth",block:"start"});
+}
+function searchWeb(e){
+ e.preventDefault();
+ const q=document.getElementById("query").value.trim();
+ if(q)window.open("https://duckduckgo.com/?q="+encodeURIComponent(q),"_blank","noopener");
+}
+
+let secret=Math.floor(Math.random()*10)+1;
+function guessNumber(){
+ const n=Number(document.getElementById("guess").value);
+ document.getElementById("guessResult").textContent=n===secret?"Correct! New number chosen.":n<secret?"Try higher.":"Try lower.";
+ if(n===secret)secret=Math.floor(Math.random()*10)+1;
+}
+let reactionReady=false,reactionStart=0,reactionTimer=null;
+function startReaction(){
+ clearTimeout(reactionTimer);reactionReady=false;
+ const area=document.getElementById("reaction");
+ area.style.background="#733a16";area.textContent="WAIT...";
+ document.getElementById("reactionResult").textContent="";
+ reactionTimer=setTimeout(()=>{
+  reactionReady=true;reactionStart=performance.now();
+  area.style.background="#087a43";area.textContent="CLICK NOW!";
+ },1000+Math.random()*3000);
+}
+function hitReaction(){
+ const area=document.getElementById("reaction");
+ if(!reactionReady){document.getElementById("reactionResult").textContent="Wait until green!";return}
+ reactionReady=false;
+ document.getElementById("reactionResult").textContent="Reaction: "+Math.round(performance.now()-reactionStart)+" ms";
+ area.style.background="var(--bg)";area.textContent="READY";
+}
+
+// Interactive aerodynamics drawing lab
+const canvas=document.getElementById("labCanvas"),ctx=canvas.getContext("2d");
+let strokes=[],currentStroke=null,particles=[],windSpeed=5,flowOn=true,cw=800,ch=330;
+document.getElementById("wind").addEventListener("input",e=>{
+ windSpeed=Number(e.target.value);
+ document.getElementById("windVal").textContent=windSpeed;
+});
+function resizeLab(){
+ const rect=canvas.getBoundingClientRect(),dpr=Math.min(devicePixelRatio||1,2);
+ cw=Math.max(1,rect.width);ch=Math.max(1,rect.height);
+ canvas.width=Math.round(cw*dpr);canvas.height=Math.round(ch*dpr);
+ ctx.setTransform(dpr,0,0,dpr,0,0);
+ particles=Array.from({length:Math.max(100,Math.floor(cw/4))},()=>makeParticle(true));
+}
+function makeParticle(random=false){
+ return{x:random?Math.random()*cw:-5,y:Math.random()*ch,speed:.6+Math.random()*1.4,size:.8+Math.random()*1.4,wobble:Math.random()*6.28};
+}
+function pos(e){const r=canvas.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}}
+canvas.addEventListener("pointerdown",e=>{
+ e.preventDefault();canvas.setPointerCapture(e.pointerId);
+ currentStroke=[pos(e)];strokes.push(currentStroke);
+});
+canvas.addEventListener("pointermove",e=>{if(currentStroke)currentStroke.push(pos(e))});
+function endStroke(){currentStroke=null;updateDrag()}
+canvas.addEventListener("pointerup",endStroke);
+canvas.addEventListener("pointercancel",endStroke);
+function clearDrawing(){strokes=[];currentStroke=null;updateDrag()}
+function toggleFlow(){flowOn=!flowOn;document.getElementById("flowButton").textContent=flowOn?"Pause airflow":"Resume airflow"}
+function nearestPoint(x,y){
+ let best=Infinity,near=null;
+ for(const s of strokes)for(const p of s){
+  const d=(p.x-x)**2+(p.y-y)**2;
+  if(d<best){best=d;near=p}
+ }
+ return{d:Math.sqrt(best),p:near};
+}
+function updateDrag(){
+ let count=0;
+ for(const s of strokes)count+=s.length;
+ document.getElementById("dragRead").textContent=strokes.length?Math.min(100,Math.round(count/Math.max(1,cw*ch/200)*100))+" (illustrative)":"—";
+ document.getElementById("flowRead").textContent=strokes.length?"Flow deflects near the drawn lines.":"Draw a shape to see airflow react.";
+}
+function drawLab(){
+ ctx.clearRect(0,0,cw,ch);ctx.fillStyle="#06131c";ctx.fillRect(0,0,cw,ch);
+ ctx.strokeStyle="#163444";ctx.lineWidth=1;
+ for(let x=0;x<cw;x+=30){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,ch);ctx.stroke()}
+ for(let y=0;y<ch;y+=30){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(cw,y);ctx.stroke()}
+ for(const p of particles){
+  if(flowOn){
+   let vx=windSpeed*(.45+p.speed*.28),vy=Math.sin(p.wobble)*.35;
+   const near=nearestPoint(p.x,p.y);
+   if(near.p&&near.d<48&&near.d>.01){
+    const strength=(48-near.d)/48;
+    vy+=(p.y-near.p.y)/near.d*strength*2.8;
+    vx-=strength*windSpeed*.25;
+   }
+   p.x+=vx;p.y+=vy;p.wobble+=.025;
+   if(p.x>cw+4){p.x=-4;p.y=Math.random()*ch}
+   p.y=Math.max(0,Math.min(ch,p.y));
   }
-});
-function openLink(url) {
-  window.open(url, '_blank', 'noopener');
+  ctx.fillStyle="#65eaffaa";ctx.fillRect(p.x,p.y,p.size*3,p.size);
+ }
+ ctx.lineCap="round";ctx.lineJoin="round";
+ for(const s of strokes){
+  if(!s.length)continue;
+  ctx.beginPath();ctx.moveTo(s[0].x,s[0].y);
+  for(let i=1;i<s.length;i++)ctx.lineTo(s[i].x,s[i].y);
+  ctx.strokeStyle="#ffcf75";ctx.lineWidth=5;ctx.stroke();
+  ctx.strokeStyle="#fff1bd";ctx.lineWidth=1.5;ctx.stroke();
+ }
+ document.getElementById("speedRead").textContent=windSpeed+" units";
+ requestAnimationFrame(drawLab);
 }
-const box = document.getElementById('gameBox');
-const message = document.getElementById('gameMessage');
-const controls = document.getElementById('gameControls');
-function setupGame(title, text) {
-  box.hidden = false;
-  document.getElementById('gameTitle').textContent = title;
-  message.textContent = text;
-  controls.replaceChildren();
-}
-function closeGame() { box.hidden = true; }
-
-let reactionStart = 0;
-let reactionTimer;
-function startReaction() {
-  clearTimeout(reactionTimer);
-  setupGame('REACTION TEST', 'Wait for GO... then click it!');
-  const b = document.createElement('button');
-  b.textContent = 'WAIT...';
-  b.disabled = true;
-  controls.append(b);
-  reactionTimer = setTimeout(() => {
-    reactionStart = performance.now();
-    b.textContent = 'GO!';
-    b.disabled = false;
-    b.onclick = () => {
-      message.textContent =
-        'Your reaction time: ' +
-        Math.round(performance.now() - reactionStart) + ' ms';
-      b.disabled = true;
-    };
-  }, 1500 + Math.random() * 3000);
-}
-let secret;
-function startGuess() {
-  secret = Math.floor(Math.random() * 100) + 1;
-  setupGame('NUMBER GUESS', 'Enter a number from 1 to 100.');
-  const input = document.createElement('input');
-  input.type = 'number';
-  input.min = 1;
-  input.max = 100;
-  input.placeholder = 'Your guess';
-  input.className = 'gameInput';
-  const b = document.createElement('button');
-  b.textContent = 'Guess';
-  b.onclick = () => {
-    const n = Number(input.value);
-    if (!Number.isInteger(n) || n < 1 || n > 100) {
-      message.textContent = 'Enter a whole number from 1 to 100.';
-    } else if (n === secret) {
-      message.textContent = 'Correct! You cracked the code.';
-    } else {
-      message.textContent = n < secret ? 'Too low. Try again!' : 'Too high. Try again!';
-    }
-  };
-  controls.append(input, b);
-}
-
-// Animated falling code with a gentle cursor-wave effect.
-const canvas = document.getElementById('matrix');
-const ctx = canvas.getContext('2d');
-let width, height, drops = [], mouseX = -1000, mouseY = -1000;
-function resize() {
-  width = canvas.width = window.innerWidth;
-  height = canvas.height = window.innerHeight;
-  drops = Array.from({length: Math.ceil(width / 17)}, () =>
-    Math.random() * height / 17
-  );
-}
-window.addEventListener('resize', resize);
-window.addEventListener('pointermove', e => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-});
-function drawMatrix() {
-  ctx.fillStyle = 'rgba(5,10,8,0.12)';
-  ctx.fillRect(0, 0, width, height);
-  ctx.fillStyle = '#39ff88';
-  ctx.font = '14px monospace';
-  drops.forEach((drop, i) => {
-    const x = i * 17;
-    const y = drop * 17;
-    const dx = x - mouseX, dy = y - mouseY;
-    const distance = Math.sqrt(dx * dx + dy * dy);
-    const wave = Math.max(0, 1 - distance / 150);
-    ctx.globalAlpha = 0.25 + wave * 0.75;
-    ctx.fillText(Math.random() > 0.5 ? '1' : '0',
-      x + (distance < 150 ? dx * wave * 0.12 : 0),
-      y + (distance < 150 ? dy * wave * 0.12 : 0));
-    if (y > height && Math.random() > 0.975) drops[i] = 0;
-    else drops[i] += 0.45 + Math.random() * 0.35;
-  });
-  ctx.globalAlpha = 1;
-  requestAnimationFrame(drawMatrix);
-}
-resize();
-drawMatrix();
+new ResizeObserver(resizeLab).observe(canvas);
+resizeLab();updateDrag();drawLab();
 </script>
 </body>
 </html>
 
-<div id="themeFX" aria-hidden="true">
-  <div class="poly poly-one"></div>
-  <div class="poly poly-two"></div>
-  <div class="poly poly-three"></div>
-  <div class="fx-orb"></div>
-  <div class="fx-orb orb-two"></div>
-  <div class="fx-stars"></div>
-</div>
-
-/* === TEAM NEPTUNE ANIMATED THEMES === */
-#themeFX {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse at 20% 20%, #06452b88, transparent 50%),
-    linear-gradient(135deg, #020805, #071b12, #020805);
-  background-size: 200% 200%;
-  animation: fxGradient 16s ease-in-out infinite alternate;
-}
-
-/* Keep portal content above the animation */
-#portalScreen, #lockScreen {
-  position: relative;
-  z-index: 2;
-}
-
-#themeFX .poly {
-  position: absolute;
-  width: 75vw;
-  height: 85vh;
-  bottom: -25vh;
-  opacity: .5;
-  clip-path: polygon(
-    0 100%, 0 62%, 12% 45%, 20% 58%,
-    35% 15%, 45% 50%, 59% 28%,
-    73% 62%, 87% 35%, 100% 65%, 100% 100%
-  );
-  background: linear-gradient(145deg, #35436d, #11152f 65%);
-  animation: mountainDrift 24s ease-in-out infinite alternate;
-}
-
-#themeFX .poly-one {
-  left: -15%;
-  bottom: -20vh;
-}
-
-#themeFX .poly-two {
-  right: -25%;
-  bottom: -27vh;
-  transform: scale(1.3);
-  opacity: .35;
-  animation-delay: -9s;
-  background: linear-gradient(120deg, #6b477f, #14122c 70%);
-}
-
-#themeFX .poly-three {
-  left: 15%;
-  bottom: -45vh;
-  transform: scale(.8);
-  opacity: .28;
-  animation-delay: -15s;
-}
-
-#themeFX .fx-orb {
-  position: absolute;
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  top: 12%;
-  right: 14%;
-  opacity: .18;
-  background: radial-gradient(circle at 35% 30%,
-    #fff5d7, #d5a8ff 35%, #643b9a 70%, transparent 72%);
-  filter: blur(1px);
-  animation: orbFloat 12s ease-in-out infinite alternate;
-}
-
-#themeFX .orb-two {
-  width: 90px;
-  height: 90px;
-  top: 58%;
-  right: 70%;
-  opacity: .12;
-  animation-delay: -5s;
-}
-
-#themeFX .fx-stars {
-  position: absolute;
-  inset: -50%;
-  opacity: .5;
-  background-image:
-    radial-gradient(2px 2px at 20% 30%, white 50%, transparent 60%),
-    radial-gradient(1px 1px at 70% 20%, white 50%, transparent 60%),
-    radial-gradient(2px 2px at 60% 80%, white 50%, transparent 60%),
-    radial-gradient(1px 1px at 35% 70%, white 50%, transparent 60%),
-    radial-gradient(2px 2px at 85% 55%, white 50%, transparent 60%);
-  background-size: 230px 190px;
-  animation: starDrift 35s linear infinite;
-}
-
-/* Frutiger Aero: aqua, glass and bubbles */
-body[data-theme="aero"] #themeFX {
-  background: linear-gradient(135deg, #54dbe8, #c2ffff, #5ba8ed, #e1fff5);
-  background-size: 300% 300%;
-  animation: fxGradient 12s ease infinite alternate;
-}
-body[data-theme="aero"] #themeFX .fx-orb {
-  width: 90px;
-  height: 90px;
-  opacity: .6;
-  background: radial-gradient(circle at 30% 25%,
-    white, #baffff 35%, #32bbd855 70%, transparent 72%);
-  box-shadow: inset -8px -8px 18px #007eaa33;
-}
-body[data-theme="aero"] #themeFX .poly {
-  background: linear-gradient(145deg, #8ce9bd, #31b8cf);
-  opacity: .25;
-}
-
-/* Dark Fantasy: low-poly moonlit mountains */
-body[data-theme="darkfantasy"] #themeFX {
-  background:
-    radial-gradient(ellipse at 78% 16%, #644d8a55, transparent 27%),
-    linear-gradient(#100d25, #292043 55%, #080b18);
-}
-body[data-theme="darkfantasy"] #themeFX .poly {
-  opacity: .82;
-  background: linear-gradient(145deg, #6a5b86 0 18%, #353352 18% 39%,
-    #24243d 39% 62%, #11172c 62%);
-  clip-path: polygon(
-    0 100%, 0 60%, 10% 48%, 18% 60%, 31% 15%,
-    38% 40%, 45% 29%, 55% 62%, 66% 18%,
-    75% 47%, 84% 32%, 100% 64%, 100% 100%
-  );
-}
-body[data-theme="darkfantasy"] #themeFX .poly-two {
-  background: linear-gradient(130deg, #ad80b8, #4a365e 35%, #14162d 75%);
-  clip-path: polygon(
-    0 100%, 0 70%, 17% 30%, 27% 53%, 39% 5%,
-    50% 49%, 63% 27%, 77% 65%, 90% 35%, 100% 55%, 100% 100%
-  );
-}
-body[data-theme="darkfantasy"] #themeFX .fx-orb {
-  width: 190px;
-  height: 190px;
-  top: 9%;
-  right: 13%;
-  opacity: .48;
-  background: radial-gradient(circle, #f1d8ff, #b8a1e8 45%, #75569f 68%, transparent 70%);
-  box-shadow: 0 0 70px #ad8cff35;
-}
-body[data-theme="darkfantasy"] #themeFX .fx-stars {
-  opacity: .85;
-  animation-duration: 50s;
-}
-
-/* Backrooms: shifting fluorescent yellow halls */
-body[data-theme="backrooms"] #themeFX {
-  background: repeating-linear-gradient(90deg,
-    #aaa45a 0 110px, #c4bb6b 111px 220px, #8d884b 221px 224px);
-  background-size: 450px 100%;
-  animation: hallwayMove 22s linear infinite;
-}
-body[data-theme="backrooms"] #themeFX .fx-orb {
-  width: 70vw;
-  height: 18px;
-  top: 12%;
-  right: 15%;
-  border-radius: 0;
-  opacity: .25;
-  background: #fff8bf;
-  filter: blur(18px);
-}
-
-/* Halloween: drifting orange and purple fog */
-body[data-theme="halloween"] #themeFX {
-  background: radial-gradient(ellipse at 30% 80%, #76254d, transparent 45%),
-    linear-gradient(130deg, #10091f, #32103e, #090713);
-  background-size: 200% 200%;
-  animation: fxGradient 14s ease-in-out infinite alternate;
-}
-body[data-theme="halloween"] #themeFX .fx-orb {
-  background: radial-gradient(circle, #ffac38, #e75a1722 65%, transparent 72%);
-  opacity: .3;
-}
-
-/* Christmas: snow and festive glow */
-body[data-theme="christmas"] #themeFX {
-  background: linear-gradient(135deg, #061b20, #0d3829, #101728);
-}
-body[data-theme="christmas"] #themeFX .fx-stars {
-  opacity: .85;
-  background-image:
-    radial-gradient(3px 3px at 20% 20%, white 50%, transparent 60%),
-    radial-gradient(2px 2px at 50% 55%, white 50%, transparent 60%),
-    radial-gradient(3px 3px at 80% 35%, white 50%, transparent 60%),
-    radial-gradient(2px 2px at 30% 80%, white 50%, transparent 60%);
-  background-size: 95px 105px;
-  animation: snowFall 12s linear infinite;
-}
-
-/* Cyberpunk: moving neon city light */
-body[data-theme="cyberpunk"] #themeFX {
-  background: repeating-linear-gradient(110deg,
-    #0a071a 0 60px, #24103b 61px 64px,
-    #101331 65px 125px, #401044 126px 129px);
-  background-size: 220% 220%;
-  animation: fxGradient 10s linear infinite alternate;
-}
-body[data-theme="cyberpunk"] #themeFX .fx-orb {
-  background: radial-gradient(circle, #ff42d4, #4e39ff44 60%, transparent 72%);
-  opacity: .28;
-}
-
-/* Ocean: slowly moving underwater light */
-body[data-theme="ocean"] #themeFX {
-  background: linear-gradient(160deg, #042c4b, #075a76, #031525);
-  background-size: 200% 200%;
-  animation: fxGradient 16s ease infinite alternate;
-}
-body[data-theme="ocean"] #themeFX .fx-stars {
-  background-image:
-    radial-gradient(3px 3px at 20% 30%, #9ffaff 50%, transparent 65%),
-    radial-gradient(2px 2px at 70% 60%, #8cecff 50%, transparent 65%);
-  background-size: 140px 160px;
-  animation: bubbleRise 18s linear infinite;
-}
-
-/* Vaporwave: drifting pink and purple */
-body[data-theme="vaporwave"] #themeFX {
-  background: linear-gradient(140deg, #35104c, #862a78, #20184d, #100d28);
-  background-size: 300% 300%;
-  animation: fxGradient 13s ease infinite alternate;
-}
-
-/* Blood Moon: red lunar glow */
-body[data-theme="bloodmoon"] #themeFX {
-  background: radial-gradient(circle at 78% 20%, #9b202b55, transparent 25%),
-    linear-gradient(#1b080f, #320b1a, #080508);
-}
-body[data-theme="bloodmoon"] #themeFX .fx-orb {
-  background: radial-gradient(circle, #ff5757, #8f101c 55%, #4a0912 70%, transparent 72%);
-  opacity: .42;
-}
-
-/* Enchanted Forest */
-body[data-theme="forest"] #themeFX {
-  background: radial-gradient(ellipse at 50% 90%, #19522c, transparent 50%),
-    linear-gradient(#071b14, #0d3c26, #04110b);
-}
-body[data-theme="forest"] #themeFX .fx-stars {
-  background-image:
-    radial-gradient(3px 3px at 25% 25%, #c8ff95 50%, transparent 65%),
-    radial-gradient(2px 2px at 65% 70%, #8bffb7 50%, transparent 65%);
-  background-size: 170px 190px;
-  animation: starDrift 25s linear infinite;
-}
-
-/* Frozen Arctic */
-body[data-theme="ice"] #themeFX {
-  background: linear-gradient(145deg, #1b5270, #a4e6f5, #14304f, #071522);
-  background-size: 250% 250%;
-  animation: fxGradient 18s ease infinite alternate;
-}
-body[data-theme="ice"] #themeFX .fx-stars {
-  opacity: .75;
-  animation: snowFall 17s linear infinite;
-}
-
-/* Sunset */
-body[data-theme="sunset"] #themeFX {
-  background: linear-gradient(145deg, #ffad68, #bd4d72, #4a245a, #1b143c);
-  background-size: 250% 250%;
-  animation: fxGradient 15s ease infinite alternate;
-}
-
-/* Monochrome */
-body[data-theme="monochrome"] #themeFX {
-  background: radial-gradient(ellipse at 50% 0%, #393939, #080808 65%);
-}
-body[data-theme="monochrome"] #themeFX .poly {
-  background: linear-gradient(145deg, #777, #202020 60%);
-}
-
-/* Shared animation keyframes */
-@keyframes fxGradient {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 100% 100%; }
-}
-@keyframes mountainDrift {
-  0% { transform: translate3d(-2%, 0, 0) scale(1); }
-  100% { transform: translate3d(3%, -3%, 0) scale(1.04); }
-}
-@keyframes orbFloat {
-  0% { transform: translate(-15px, 12px); }
-  100% { transform: translate(25px, -22px); }
-}
-@keyframes starDrift {
-  from { transform: translateY(0); }
-  to { transform: translateY(160px); }
-}
-@keyframes snowFall {
-  from { transform: translateY(-10%); }
-  to { transform: translateY(35%); }
-}
-@keyframes bubbleRise {
-  from { transform: translateY(15%); }
-  to { transform: translateY(-25%); }
-}
-@keyframes hallwayMove {
-  from { background-position: 0 0; }
-  to { background-position: 450px 0; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  #themeFX, #themeFX * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-  }
-}
 
  
